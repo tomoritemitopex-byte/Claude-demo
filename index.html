@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Claude Demo</title>
+  <script src="https://js.puter.com/v2/"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    textarea {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    pre {
+      text-align: left;
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      width: 80%;
+      margin: 20px auto;
+      font-size: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Claude Demo Playground</h1>
+
+  <textarea id="prompt" rows="4" placeholder="Type your question here..."></textarea><br>
+
+  <button onclick="askClaude('claude-haiku-4-5')">Haiku (Fast)</button>
+  <button onclick="askClaude('claude-sonnet-4-6')">Sonnet (Balanced)</button>
+  <button onclick="askClaude('claude-opus-4-6')">Opus (Most Powerful)</button>
+
+  <h2>Response:</h2>
+  <pre id="response">Your answer will appear here...</pre>
+
+  <script>
+    async function askClaude(model) {
+      const prompt = document.getElementById("prompt").value;
+      document.getElementById("response").textContent = "Thinking...";
+      const reply = await puter.ai.chat(prompt, { model: model });
+      document.getElementById("response").textContent = reply.message.content[0].text;
+    }
+  </script>
+</body>
+</html>
